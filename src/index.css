@@ -8,64 +8,64 @@ All colors are HSL for consistency and theming
 
 @layer base {
   :root {
-    /* Background & Surface Colors */
+    /* Background & Surface Colors - Clean White Theme */
     --background: 0 0% 100%;
-    --foreground: 220 14% 8%;
-    --surface: 215 20% 98%;
-    --surface-variant: 215 16% 96%;
+    --foreground: 220 15% 10%;
+    --surface: 0 0% 100%;
+    --surface-variant: 0 0% 98%;
 
     /* Card & Content */
     --card: 0 0% 100%;
-    --card-foreground: 220 14% 8%;
-    --card-hover: 215 20% 98%;
+    --card-foreground: 220 15% 10%;
+    --card-hover: 0 0% 98%;
 
     /* Popover */
     --popover: 0 0% 100%;
-    --popover-foreground: 220 14% 8%;
+    --popover-foreground: 220 15% 10%;
 
-    /* Primary - Professional Charcoal Navy */
-    --primary: 220 26% 14%;
-    --primary-foreground: 210 40% 98%;
-    --primary-hover: 220 26% 18%;
-    --primary-light: 220 26% 22%;
+    /* Primary - Professional Navy */
+    --primary: 220 30% 18%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 220 30% 22%;
+    --primary-light: 220 30% 85%;
 
-    /* Secondary - Sophisticated Gray */
-    --secondary: 215 16% 94%;
-    --secondary-foreground: 220 14% 8%;
-    --secondary-hover: 215 16% 90%;
+    /* Secondary - Clean White with Subtle Gray */
+    --secondary: 0 0% 97%;
+    --secondary-foreground: 220 15% 10%;
+    --secondary-hover: 0 0% 94%;
 
-    /* Muted - Professional Neutrals */
-    --muted: 215 16% 94%;
-    --muted-foreground: 220 9% 46%;
+    /* Muted - Subtle Gray Tones */
+    --muted: 0 0% 96%;
+    --muted-foreground: 220 10% 45%;
 
-    /* Accent - Refined Steel Blue */
-    --accent: 210 40% 38%;
+    /* Accent - Professional Blue */
+    --accent: 215 85% 50%;
     --accent-foreground: 0 0% 100%;
-    --accent-hover: 210 40% 34%;
-    --accent-light: 210 40% 88%;
+    --accent-hover: 215 85% 45%;
+    --accent-light: 215 85% 95%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
     /* Borders & Inputs */
-    --border: 215 14% 89%;
-    --border-soft: 215 14% 92%;
-    --input: 215 14% 89%;
-    --ring: 210 40% 38%;
+    --border: 220 15% 92%;
+    --border-soft: 220 15% 95%;
+    --input: 220 15% 92%;
+    --ring: 215 85% 50%;
 
-    /* Professional Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(220 26% 14%) 0%, hsl(220 26% 18%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(210 40% 38%) 0%, hsl(210 40% 34%) 100%);
-    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(215 20% 98%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(220 26% 14%) 0%, hsl(220 26% 18%) 50%, hsl(210 40% 38%) 100%);
+    /* Clean Professional Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220 30% 18%) 0%, hsl(220 30% 22%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(215 85% 50%) 0%, hsl(215 85% 45%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 30% 98%) 50%, hsl(215 85% 96%) 100%);
 
-    /* Shadows */
-    --shadow-sm: 0 2px 4px -1px hsl(220 14% 8% / 0.06);
-    --shadow-md: 0 4px 12px -2px hsl(220 14% 8% / 0.1);
-    --shadow-lg: 0 8px 24px -4px hsl(220 14% 8% / 0.15);
-    --shadow-xl: 0 20px 40px -8px hsl(220 14% 8% / 0.18);
-    --shadow-accent: 0 8px 24px -4px hsl(210 40% 38% / 0.25);
+    /* Clean Shadows */
+    --shadow-sm: 0 2px 4px -1px hsl(220 15% 10% / 0.04);
+    --shadow-md: 0 4px 12px -2px hsl(220 15% 10% / 0.08);
+    --shadow-lg: 0 8px 24px -4px hsl(220 15% 10% / 0.12);
+    --shadow-xl: 0 20px 40px -8px hsl(220 15% 10% / 0.15);
+    --shadow-accent: 0 8px 24px -4px hsl(215 85% 50% / 0.2);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
