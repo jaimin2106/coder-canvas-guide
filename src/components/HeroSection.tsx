@@ -2,7 +2,6 @@ import { ArrowRight, Download, Github, Linkedin, Mail, Code, Sparkles, Trophy, Z
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import heroImage from "@/assets/hero-bg.jpg";
-import profileAvatar from "@/assets/profile-avatar.jpg";
 
 const HeroSection = () => {
   const technologies = ["React", "TypeScript", "Node.js", "Python", "MongoDB"];
@@ -13,7 +12,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -116,7 +115,7 @@ const HeroSection = () => {
             <div className="relative inline-block mb-8">
               <div className="absolute inset-0 bg-gradient-accent rounded-full blur-2xl opacity-30 animate-pulse"></div>
               <img
-                src={profileAvatar}
+                src="/lovable-uploads/c0410440-7dee-47ea-a331-e6efeb5f2a56.png"
                 alt="Profile"
                 className="relative w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto rounded-full border-4 border-accent shadow-accent-glow animate-float hover:scale-105 transition-transform duration-500"
               />
