@@ -205,25 +205,31 @@ const HeroSection = () => {
 
           {/* Right Side - 3D Model & Interactive Stats */}
           <div className="text-center animate-fade-in space-y-8" style={{animationDelay: '0.3s'}}>
-            {/* Interactive 3D Model Container */}
+            {/* Interactive 3D Robot Model */}
             <div className="relative group">
-              <div className="w-full h-96 md:h-[500px] bg-gradient-to-br from-accent/5 to-primary/5 rounded-3xl border border-border-soft backdrop-blur-sm overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                {/* Spline 3D Model Placeholder - You can replace the scene URL with your own */}
-                <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-accent opacity-5 animate-pulse"></div>
-                  <div className="relative z-10 text-center">
-                    <div className="w-32 h-32 mx-auto bg-gradient-accent rounded-full flex items-center justify-center mb-4 animate-float">
-                      <Code className="h-16 w-16 text-accent-foreground" />
-                    </div>
-                    <p className="text-muted-foreground">3D Model Loading...</p>
-                    <p className="text-sm text-accent mt-2">Replace with your Spline scene URL</p>
+              <div className="w-full h-96 md:h-[600px] bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 rounded-3xl border border-border-soft backdrop-blur-sm overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:scale-[1.02] relative">
+                {/* Spline 3D Robot Model */}
+                <div className="w-full h-full relative overflow-hidden rounded-3xl">
+                  <Spline
+                    scene="https://my.spline.design/r4xbot-M32YN6IxQ6LElApqMblJZSEG/"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      background: 'transparent'
+                    }}
+                  />
+                  
+                  {/* Interactive Overlay Elements */}
+                  <div className="absolute top-4 right-4 flex gap-2 z-10">
+                    <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
+                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" style={{animationDelay: '0.5s'}}></div>
+                    <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" style={{animationDelay: '1s'}}></div>
                   </div>
                   
-                  {/* Interactive Elements */}
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <div className="w-3 h-3 bg-red-400 rounded-full animate-pulse"></div>
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                  {/* Robot Status Indicator */}
+                  <div className="absolute bottom-4 left-4 bg-surface/80 backdrop-blur-md border border-border-soft rounded-full px-4 py-2 flex items-center gap-2 z-10">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-medium text-foreground">Robot Online</span>
                   </div>
                 </div>
               </div>
