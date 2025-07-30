@@ -59,27 +59,23 @@ const HeroSection = () => {
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5"></div>
         
-        {/* Interactive Floating Elements */}
+        {/* Subtle Floating Elements */}
         <div className="absolute inset-0">
-          {Array.from({ length: 15 }).map((_, i) => (
+          {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className={`absolute w-2 h-2 bg-accent/20 rounded-full animate-float`}
+              className={`absolute w-1 h-1 bg-accent/10 rounded-full`}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 2}s`,
-                transform: isHovered ? `translate(${(mousePosition.x - 50) * 0.1}px, ${(mousePosition.y - 50) * 0.1}px)` : 'none',
-                transition: 'transform 0.3s ease-out'
               }}
             />
           ))}
         </div>
 
-        {/* Interactive Gradient Blob */}
+        {/* Subtle Gradient Blob */}
         <div 
-          className="absolute w-96 h-96 bg-gradient-accent opacity-10 rounded-full blur-3xl animate-pulse"
+          className="absolute w-96 h-96 bg-gradient-accent opacity-5 rounded-full blur-3xl"
           style={{
             left: `${mousePosition.x}%`,
             top: `${mousePosition.y}%`,
@@ -96,8 +92,8 @@ const HeroSection = () => {
           {/* Left Side - Enhanced Text Content */}
           <div className="text-center lg:text-left animate-fade-in space-y-8">
             {/* Dynamic Status Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-accent/10 backdrop-blur-sm text-accent px-6 py-3 rounded-full text-sm font-medium border border-accent/20 animate-scale-in hover:scale-105 transition-transform cursor-default">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 bg-gradient-accent/10 backdrop-blur-sm text-accent px-6 py-3 rounded-full text-sm font-medium border border-accent/20 transition-transform cursor-default">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
               <Sparkles className="h-4 w-4" />
               <span className="bg-gradient-accent bg-clip-text text-transparent font-semibold">
                 Available for Amazing Projects
@@ -107,27 +103,27 @@ const HeroSection = () => {
             {/* Main Title with Enhanced Animation */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-                <span className="block animate-fade-in">Hi, I'm</span>
-                <span className="block bg-gradient-accent bg-clip-text text-transparent animate-glow hover:scale-105 transition-transform inline-block cursor-default">
+                <span className="block">Hi, I'm</span>
+                <span className="block bg-gradient-accent bg-clip-text text-transparent transition-transform inline-block cursor-default">
                   Your Name
                 </span>
               </h1>
               <div className="flex items-center justify-center lg:justify-start gap-3">
-                <Rocket className="h-8 w-8 text-accent animate-bounce" />
+                <Rocket className="h-8 w-8 text-accent" />
                 <h2 className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-semibold">
                   Full Stack Developer
                 </h2>
-                <Heart className="h-6 w-6 text-red-400 animate-pulse" />
+                <Heart className="h-6 w-6 text-red-400" />
               </div>
             </div>
 
             {/* Dynamic Quote */}
-            <div className="bg-surface/30 backdrop-blur-sm border border-border-soft rounded-2xl p-6 hover:bg-surface/50 transition-all duration-300 hover:scale-105">
+            <div className="bg-surface/30 backdrop-blur-sm border border-border-soft rounded-2xl p-6 hover:bg-surface/50 transition-all duration-300">
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                <span className="animate-fade-in key={currentQuote}">{inspirationalQuotes[currentQuote]}</span>
+                <span key={currentQuote}>{inspirationalQuotes[currentQuote]}</span>
               </p>
               <div className="flex items-center gap-2 mt-3">
-                <Coffee className="h-5 w-5 text-accent animate-bounce" />
+                <Coffee className="h-5 w-5 text-accent" />
                 <span className="text-sm text-accent font-medium">Passionate B.Tech Student</span>
               </div>
             </div>
@@ -213,7 +209,7 @@ const HeroSection = () => {
                     {/* Animated 3D-like Robot Placeholder */}
                     <div className="relative group">
                       {/* Robot Body */}
-                      <div className="w-32 h-40 bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-2xl transform hover:scale-110 transition-all duration-500 animate-float relative overflow-hidden">
+                      <div className="w-32 h-40 bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-2xl transform hover:scale-110 transition-all duration-500 relative overflow-hidden">
                         {/* Robot Head */}
                         <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-xl shadow-lg">
                           {/* Eyes */}
