@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail, Code, Sparkles, Trophy, Zap, Star, Rocket, Heart, Coffee } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import Spline from '@splinetool/react-spline';
 import heroImage from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
@@ -210,14 +209,45 @@ const HeroSection = () => {
               <div className="w-full h-96 md:h-[600px] bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 rounded-3xl border border-border-soft backdrop-blur-sm overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:scale-[1.02] relative">
                 {/* Spline 3D Robot Model */}
                 <div className="w-full h-full relative overflow-hidden rounded-3xl">
-                  <Spline
-                    scene="https://my.spline.design/r4xbot-M32YN6IxQ6LElApqMblJZSEG/"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      background: 'transparent'
-                    }}
-                  />
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-cyan-500/10">
+                    {/* Animated 3D-like Robot Placeholder */}
+                    <div className="relative group">
+                      {/* Robot Body */}
+                      <div className="w-32 h-40 bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-2xl transform hover:scale-110 transition-all duration-500 animate-float relative overflow-hidden">
+                        {/* Robot Head */}
+                        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-xl shadow-lg">
+                          {/* Eyes */}
+                          <div className="flex justify-center items-center h-full gap-2">
+                            <div className="w-3 h-3 bg-yellow-300 rounded-full animate-pulse"></div>
+                            <div className="w-3 h-3 bg-yellow-300 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                          </div>
+                        </div>
+                        
+                        {/* Robot Arms */}
+                        <div className="absolute -left-6 top-4 w-4 h-16 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                        <div className="absolute -right-6 top-4 w-4 h-16 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
+                        
+                        {/* Robot Chest Panel */}
+                        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-16 h-12 bg-gradient-to-b from-cyan-300/30 to-transparent rounded-lg border border-cyan-300/50">
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div className="w-8 h-1 bg-cyan-300 rounded-full animate-pulse mb-2"></div>
+                          </div>
+                        </div>
+                        
+                        {/* Robot Legs */}
+                        <div className="absolute -bottom-12 left-3 w-4 h-12 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full"></div>
+                        <div className="absolute -bottom-12 right-3 w-4 h-12 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full"></div>
+                        
+                        {/* Glow Effect */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-cyan-400/20 to-transparent animate-pulse"></div>
+                      </div>
+                      
+                      {/* Floating Code Symbols */}
+                      <div className="absolute -top-4 -left-8 text-cyan-400 animate-bounce opacity-70" style={{animationDelay: '0.1s'}}>{"</>"}</div>
+                      <div className="absolute top-8 -right-12 text-purple-400 animate-bounce opacity-70" style={{animationDelay: '0.3s'}}>{"{ }"}</div>
+                      <div className="absolute -bottom-8 left-12 text-blue-400 animate-bounce opacity-70" style={{animationDelay: '0.5s'}}>{"( )"}</div>
+                    </div>
+                  </div>
                   
                   {/* Interactive Overlay Elements */}
                   <div className="absolute top-4 right-4 flex gap-2 z-10">
