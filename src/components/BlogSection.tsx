@@ -164,9 +164,11 @@ const BlogSection = () => {
 
         {/* View All Posts Button */}
         <div className="text-center mt-12">
-          <Button variant="professional" size="lg" className="gap-2">
-            View All Blog Posts
-            <ArrowRight className="h-5 w-5" />
+          <Button variant="outline" size="lg" className="gap-2" asChild>
+            <a href="/blog">
+              View All Blog Posts
+              <ArrowRight className="h-5 w-5" />
+            </a>
           </Button>
         </div>
       </div>

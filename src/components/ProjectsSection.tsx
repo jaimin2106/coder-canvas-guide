@@ -108,28 +108,39 @@ const ProjectsSection = () => {
           {filteredProjects.map((project, index) => (
             <div
               key={project.title}
-              className="bg-card rounded-lg shadow-medium hover:shadow-large transition-all duration-300 overflow-hidden group hover:-translate-y-2 border border-border-soft"
+              className="group relative bg-card/80 backdrop-blur-sm rounded-xl border border-border/50 overflow-hidden hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Project Image */}
-              <div className="relative overflow-hidden">
+              {/* Project Image with Gradient Overlay */}
+              <div className="relative overflow-hidden h-56">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="flex space-x-4">
-                    <Button variant="hero" size="sm" asChild>
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                
+                {/* Category Badge */}
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 bg-primary/90 backdrop-blur-sm text-primary-foreground text-xs font-medium rounded-full shadow-sm">
+                    {project.category}
+                  </span>
+                </div>
+                
+                {/* Action Buttons - Visible on hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-background/80 backdrop-blur-sm">
+                  <div className="flex space-x-3">
+                    <Button variant="default" size="sm" asChild className="shadow-lg">
                       <a href={project.demo} className="gap-2">
                         <ExternalLink className="h-4 w-4" />
-                        Demo
+                        Live Demo
                       </a>
                     </Button>
-                    <Button variant="minimal" size="sm" asChild>
+                    <Button variant="outline" size="sm" asChild className="shadow-lg">
                       <a href={project.code} className="gap-2">
                         <Github className="h-4 w-4" />
-                        Code
+                        Source
                       </a>
                     </Button>
                   </div>
@@ -138,25 +149,20 @@ const ProjectsSection = () => {
 
               {/* Project Content */}
               <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
-                    {project.title}
-                  </h3>
-                  <span className="text-xs bg-accent-light text-accent px-2 py-1 rounded-full">
-                    {project.category}
-                  </span>
-                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                  {project.title}
+                </h3>
                 
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
                   {project.description}
                 </p>
 
-                {/* Tags */}
+                {/* Tech Stack Tags */}
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs bg-surface text-muted-foreground px-2 py-1 rounded border border-border-soft"
+                      className="px-2 py-1 bg-accent/10 text-accent text-xs font-medium rounded-md border border-accent/20 hover:bg-accent/20 transition-colors duration-200"
                     >
                       {tag}
                     </span>
@@ -168,8 +174,8 @@ const ProjectsSection = () => {
         </div>
 
         {/* View All Projects Button */}
-        <div className="text-center mt-12">
-          <Button variant="professional" size="lg" className="gap-2">
+        <div className="text-center mt-16">
+          <Button variant="outline" size="lg" className="gap-2 hover:bg-primary hover:text-primary-foreground transition-all duration-300">
             View All Projects on GitHub
             <Github className="h-5 w-5" />
           </Button>

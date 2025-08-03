@@ -21,13 +21,13 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Blog", href: "#blog" },
-    { name: "About", href: "#about" },
-    { name: "Certificates", href: "#certificates" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#home" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Blog", href: "/blog" },
+    { name: "About", href: "/#about" },
+    { name: "Certificates", href: "/#certificates" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -42,7 +42,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#home" className="text-xl font-bold text-foreground hover:text-accent transition-colors">
+            <a href="/" className="text-xl font-bold text-foreground hover:text-accent transition-colors">
               Portfolio
             </a>
           </div>

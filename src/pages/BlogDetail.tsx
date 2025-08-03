@@ -38,7 +38,7 @@ const BlogDetail = () => {
     <div className="min-h-screen bg-background pt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Back Button */}
-        <Link to="/#blog">
+        <Link to="/blog">
           <Button variant="ghost" className="mb-8 gap-2">
             <ArrowLeft className="h-4 w-4" />
             Back to Blog
