@@ -5,13 +5,17 @@ import { Button } from "./ui/button";
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
+    
+    // Set dark mode as default on initial load
+    document.documentElement.classList.add("dark");
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
