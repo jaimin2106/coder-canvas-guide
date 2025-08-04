@@ -73,7 +73,7 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ['Inter', 'system-ui', 'sans-serif'],
+				sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',

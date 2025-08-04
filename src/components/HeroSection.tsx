@@ -1,35 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Download, Github, Linkedin, Mail, Code, Sparkles, Trophy, Zap, Star, Rocket, Heart, Coffee } from "lucide-react";
+import { ArrowRight, Star, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import heroImage from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
-  const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [currentQuote, setCurrentQuote] = useState(0);
   
-  const technologies = [
-    { name: "React", icon: "⚛️", level: 95 },
-    { name: "TypeScript", icon: "📘", level: 90 },
-    { name: "Node.js", icon: "🟢", level: 85 },
-    { name: "Python", icon: "🐍", level: 80 },
-    { name: "MongoDB", icon: "🍃", level: 88 }
-  ];
-  
-  const achievements = [
-    { icon: Code, label: "Projects Built", value: "50+", color: "text-blue-400" },
-    { icon: Trophy, label: "Certifications", value: "10+", color: "text-yellow-400" },
-    { icon: Star, label: "GitHub Stars", value: "1.2k+", color: "text-purple-400" },
-  ];
-
-  const inspirationalQuotes = [
-    "Code is poetry in motion 🎨",
-    "Building the future, one line at a time 🚀",
-    "Where creativity meets technology ✨",
-    "Turning coffee into code ☕"
-  ];
-
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({
@@ -38,279 +14,193 @@ const HeroSection = () => {
     });
   };
 
-  // Cycle through quotes every 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentQuote((prev) => (prev + 1) % inspirationalQuotes.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [inspirationalQuotes.length]);
-
   return (
     <section 
       id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-gradient-to-br from-background via-background to-primary/5"
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Enhanced Background with Interactive Elements */}
+      {/* Subtle Background Effects */}
       <div className="absolute inset-0 z-0">
-        {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5"></div>
-        
-        {/* Subtle Floating Elements */}
-        <div className="absolute inset-0">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className={`absolute w-1 h-1 bg-accent/10 rounded-full`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Subtle Gradient Blob */}
+        {/* Animated gradient blob */}
         <div 
-          className="absolute w-96 h-96 bg-gradient-accent opacity-5 rounded-full blur-3xl"
+          className="absolute w-96 h-96 bg-accent/5 rounded-full blur-3xl transition-all duration-700 ease-out"
           style={{
             left: `${mousePosition.x}%`,
             top: `${mousePosition.y}%`,
             transform: 'translate(-50%, -50%)',
-            transition: 'all 0.3s ease-out'
           }}
         />
+        
+        {/* Floating particles */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className={`absolute w-1 h-1 bg-accent/20 rounded-full animate-float`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Main Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Main Content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        
+        {/* Trust Badge */}
+        <div className="mb-8 animate-fade-in">
+          <Badge variant="outline" className="bg-accent/10 border-accent/20 text-accent px-6 py-2 gap-2 text-sm font-medium backdrop-blur-sm">
+            <Star className="h-4 w-4 fill-current" />
+            TRUSTED BY 50+ BUSINESSES WORLDWIDE
+          </Badge>
+        </div>
+
+        {/* Main Headline */}
+        <div className="mb-8 animate-fade-in" style={{animationDelay: '0.2s'}}>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground leading-[0.9] tracking-tight mb-6">
+            Plan. Design.
+            <br />
+            <span className="block">Build. Maintain.</span>
+          </h1>
           
-          {/* Left Side - Enhanced Text Content */}
-          <div className="text-center lg:text-left animate-fade-in space-y-8">
-            {/* Dynamic Status Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-accent/10 backdrop-blur-sm text-accent px-6 py-3 rounded-full text-sm font-medium border border-accent/20 transition-transform cursor-default">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <Sparkles className="h-4 w-4" />
-              <span className="bg-gradient-accent bg-clip-text text-transparent font-semibold">
-                Available for Amazing Projects
-              </span>
-            </div>
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium">
+            From strategic roadmaps and pixel-perfect designs to robust, scalable code 
+            and ongoing support, we partner with you at every step.
+          </p>
+        </div>
 
-            {/* Main Title with Enhanced Animation */}
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-                <span className="block">Hi, I'm</span>
-                <span className="block bg-gradient-accent bg-clip-text text-transparent transition-transform inline-block cursor-default">
-                  Your Name
-                </span>
-              </h1>
-              <div className="flex items-center justify-center lg:justify-start gap-3">
-                <Rocket className="h-8 w-8 text-accent" />
-                <h2 className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-semibold">
-                  Full Stack Developer
-                </h2>
-                <Heart className="h-6 w-6 text-red-400" />
-              </div>
-            </div>
+        {/* CTA Button */}
+        <div className="mb-16 animate-fade-in" style={{animationDelay: '0.4s'}}>
+          <Button 
+            size="lg"
+            className="bg-accent hover:bg-accent-hover text-accent-foreground px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+          >
+            Book Discovery Call
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </div>
 
-            {/* Dynamic Quote */}
-            <div className="bg-surface/30 backdrop-blur-sm border border-border-soft rounded-2xl p-6 hover:bg-surface/50 transition-all duration-300">
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                <span key={currentQuote}>{inspirationalQuotes[currentQuote]}</span>
-              </p>
-              <div className="flex items-center gap-2 mt-3">
-                <Coffee className="h-5 w-5 text-accent" />
-                <span className="text-sm text-accent font-medium">Passionate B.Tech Student</span>
-              </div>
-            </div>
-
-            {/* Enhanced Technology Stack */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                <Code className="h-5 w-5 text-accent" />
-                Tech Stack & Expertise
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {technologies.map((tech, index) => (
-                  <div 
-                    key={tech.name}
-                    className="group bg-surface/40 backdrop-blur-sm border border-border-soft rounded-xl p-4 hover:bg-surface transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-default animate-fade-in"
-                    style={{animationDelay: `${index * 0.1}s`}}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl group-hover:scale-125 transition-transform">{tech.icon}</span>
-                      <span className="font-medium text-foreground">{tech.name}</span>
+        {/* Dashboard Preview */}
+        <div className="animate-fade-in" style={{animationDelay: '0.6s'}}>
+          <div className="relative mx-auto max-w-4xl">
+            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]">
+              
+              {/* Dashboard Header */}
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-border-soft">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
+                      <Sparkles className="h-4 w-4 text-accent-foreground" />
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-accent transition-all duration-1000 group-hover:animate-pulse"
-                        style={{width: `${tech.level}%`}}
-                      />
-                    </div>
-                    <span className="text-xs text-muted-foreground mt-1 block">{tech.level}%</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="gap-3 group hover:scale-105 transition-all duration-300 hover:shadow-xl shadow-accent/20 relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                <Download className="h-5 w-5 group-hover:animate-bounce" />
-                <span className="relative z-10">Download Resume</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
-              </Button>
-              <Button 
-                variant="minimal" 
-                size="lg" 
-                className="gap-3 hover:scale-105 transition-all duration-300 group relative"
-              >
-                <Mail className="h-5 w-5 group-hover:animate-pulse" />
-                <span>Let's Connect</span>
-                <Sparkles className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Button>
-            </div>
-
-            {/* Enhanced Social Links */}
-            <div className="flex justify-center lg:justify-start space-x-6">
-              {[
-                { icon: Github, href: "#", color: "hover:text-purple-400" },
-                { icon: Linkedin, href: "#", color: "hover:text-blue-400" },
-                { icon: Mail, href: "#", color: "hover:text-green-400" },
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className={`group text-muted-foreground ${social.color} transition-all duration-300 hover:scale-125 transform p-3 rounded-full hover:bg-accent/10 border border-transparent hover:border-accent/20 backdrop-blur-sm`}
-                >
-                  <social.icon className="h-6 w-6 group-hover:animate-pulse" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Side - 3D Model & Interactive Stats */}
-          <div className="text-center animate-fade-in space-y-8" style={{animationDelay: '0.3s'}}>
-            {/* Interactive 3D Robot Model */}
-            <div className="relative group">
-              <div className="w-full h-96 md:h-[600px] bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 rounded-3xl border border-border-soft backdrop-blur-sm overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:scale-[1.02] relative">
-                {/* Spline 3D Robot Model */}
-                <div className="w-full h-full relative overflow-hidden rounded-3xl">
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-cyan-500/10">
-                    {/* Animated 3D-like Robot Placeholder */}
-                    <div className="relative group">
-                      {/* Robot Body */}
-                      <div className="w-32 h-40 bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-2xl transform hover:scale-110 transition-all duration-500 relative overflow-hidden">
-                        {/* Robot Head */}
-                        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-xl shadow-lg">
-                          {/* Eyes */}
-                          <div className="flex justify-center items-center h-full gap-2">
-                            <div className="w-3 h-3 bg-yellow-300 rounded-full animate-pulse"></div>
-                            <div className="w-3 h-3 bg-yellow-300 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                          </div>
-                        </div>
-                        
-                        {/* Robot Arms */}
-                        <div className="absolute -left-6 top-4 w-4 h-16 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                        <div className="absolute -right-6 top-4 w-4 h-16 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
-                        
-                        {/* Robot Chest Panel */}
-                        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-16 h-12 bg-gradient-to-b from-cyan-300/30 to-transparent rounded-lg border border-cyan-300/50">
-                          <div className="w-full h-full flex items-center justify-center">
-                            <div className="w-8 h-1 bg-cyan-300 rounded-full animate-pulse mb-2"></div>
-                          </div>
-                        </div>
-                        
-                        {/* Robot Legs */}
-                        <div className="absolute -bottom-12 left-3 w-4 h-12 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full"></div>
-                        <div className="absolute -bottom-12 right-3 w-4 h-12 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full"></div>
-                        
-                        {/* Glow Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-cyan-400/20 to-transparent animate-pulse"></div>
-                      </div>
-                      
-                      {/* Floating Code Symbols */}
-                      <div className="absolute -top-4 -left-8 text-cyan-400 animate-bounce opacity-70" style={{animationDelay: '0.1s'}}>{"</>"}</div>
-                      <div className="absolute top-8 -right-12 text-purple-400 animate-bounce opacity-70" style={{animationDelay: '0.3s'}}>{"{ }"}</div>
-                      <div className="absolute -bottom-8 left-12 text-blue-400 animate-bounce opacity-70" style={{animationDelay: '0.5s'}}>{"( )"}</div>
-                    </div>
-                  </div>
-                  
-                  {/* Interactive Overlay Elements */}
-                  <div className="absolute top-4 right-4 flex gap-2 z-10">
-                    <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
-                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" style={{animationDelay: '0.5s'}}></div>
-                    <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" style={{animationDelay: '1s'}}></div>
-                  </div>
-                  
-                  {/* Robot Status Indicator */}
-                  <div className="absolute bottom-4 left-4 bg-surface/80 backdrop-blur-md border border-border-soft rounded-full px-4 py-2 flex items-center gap-2 z-10">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-xs font-medium text-foreground">Robot Online</span>
+                    <span className="font-semibold text-foreground">Sales engine</span>
                   </div>
                 </div>
+                <div className="flex items-center gap-4">
+                  <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
+                    <a href="#" className="hover:text-foreground transition-colors">Why Salesengine</a>
+                    <a href="#" className="hover:text-foreground transition-colors">Pricing</a>
+                    <a href="#" className="hover:text-foreground transition-colors">FAQ</a>
+                    <a href="#" className="hover:text-foreground transition-colors">Contact Us</a>
+                  </nav>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-5 bg-muted rounded-full relative">
+                      <div className="w-4 h-4 bg-background rounded-full absolute top-0.5 left-0.5 transition-transform"></div>
+                    </div>
+                    <Button variant="outline" size="sm" className="text-xs">
+                      Log in
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dashboard Content Preview */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="w-6 h-6 bg-muted rounded-full"></div>
+                  <span className="text-muted-foreground">Team "SalesDevils"</span>
+                  <div className="w-4 h-4 bg-muted rounded"></div>
+                </div>
+                
+                <div className="bg-muted/30 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Invite others by email</span>
+                    <Button variant="outline" size="sm" className="bg-accent text-accent-foreground text-xs">
+                      Invite
+                    </Button>
+                  </div>
+                  <div className="text-xs text-muted-foreground">Manage team members</div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2">
+                    <div className="w-8 h-8 bg-accent rounded-full border-2 border-background"></div>
+                    <div className="w-8 h-8 bg-muted rounded-full border-2 border-background"></div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-sm font-medium">Bohdan Pylkas</div>
+                    <div className="text-xs text-muted-foreground">Emily Brown</div>
+                  </div>
+                  <div className="ml-auto space-y-1">
+                    <div className="text-xs text-muted-foreground">owner</div>
+                    <div className="text-xs text-muted-foreground">can view</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Elements */}
+              <div className="absolute -top-4 -right-4 w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-accent/20">
+                <Star className="h-6 w-6 text-accent animate-pulse" />
               </div>
               
-              {/* Floating Action Buttons around 3D model */}
-              <div className="absolute -top-4 -left-4 w-12 h-12 bg-surface border border-border-soft rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer group/btn">
-                <Star className="h-6 w-6 text-yellow-400 group-hover/btn:animate-spin" />
-              </div>
-              <div className="absolute -top-4 -right-4 w-12 h-12 bg-surface border border-border-soft rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer group/btn">
-                <Rocket className="h-6 w-6 text-blue-400 group-hover/btn:animate-bounce" />
-              </div>
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-surface border border-border-soft rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer group/btn">
-                <Heart className="h-6 w-6 text-red-400 group-hover/btn:animate-pulse" />
+              <div className="absolute -bottom-4 -left-4 w-10 h-10 bg-card rounded-full flex items-center justify-center shadow-lg border border-border">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               </div>
             </div>
-
-            {/* Enhanced Achievement Stats */}
-            <div className="grid grid-cols-3 gap-4">
-              {achievements.map((achievement, index) => (
-                <div 
-                  key={achievement.label}
-                  className="group bg-surface/40 backdrop-blur-sm border border-border-soft rounded-2xl p-6 hover:bg-surface transition-all duration-300 hover:scale-110 hover:shadow-xl cursor-default animate-scale-in relative overflow-hidden"
-                  style={{animationDelay: `${0.5 + index * 0.1}s`}}
-                >
-                  <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                  <achievement.icon className={`h-8 w-8 ${achievement.color} mx-auto mb-3 group-hover:animate-bounce relative z-10`} />
-                  <div className="text-xl font-bold text-foreground group-hover:text-accent transition-colors relative z-10">{achievement.value}</div>
-                  <div className="text-xs text-muted-foreground group-hover:text-accent transition-colors relative z-10">{achievement.label}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Interactive Skill Indicators */}
-            <div className="flex justify-center space-x-8">
-              {["🔥", "⚡", "🎯", "🚀"].map((emoji, index) => (
-                <div 
-                  key={index}
-                  className="w-12 h-12 bg-surface/40 backdrop-blur-sm border border-border-soft rounded-full flex items-center justify-center hover:scale-125 transition-all duration-300 cursor-pointer animate-bounce"
-                  style={{animationDelay: `${index * 0.2}s`}}
-                >
-                  <span className="text-2xl">{emoji}</span>
-                </div>
-              ))}
-            </div>
+            
+            {/* Glow effect */}
+            <div className="absolute inset-0 -z-10 bg-accent/5 rounded-2xl blur-3xl scale-110"></div>
           </div>
         </div>
-      </div>
 
-      {/* Enhanced Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce group cursor-pointer">
-        <div className="w-8 h-12 border-2 border-accent rounded-full flex justify-center hover:scale-110 transition-transform relative overflow-hidden">
-          <div className="w-1 h-4 bg-accent rounded-full mt-2 animate-glow group-hover:bg-gradient-accent"></div>
-          <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity rounded-full"></div>
+        {/* Bottom Large Text */}
+        <div className="mt-20 animate-fade-in" style={{animationDelay: '0.8s'}}>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground/10 leading-tight tracking-wider">
+            Make your startup
+            <br />
+            <span className="text-accent/20">dreams come true</span>
+          </h2>
         </div>
-        <p className="text-xs text-muted-foreground mt-3 font-medium group-hover:text-accent transition-colors">Explore More</p>
+
+        {/* Social Links - Subtle */}
+        <div className="fixed bottom-8 left-8 flex flex-col gap-4 z-50">
+          {[
+            { icon: Github, href: "#", label: "GitHub" },
+            { icon: Linkedin, href: "#", label: "LinkedIn" },
+            { icon: Mail, href: "#", label: "Email" },
+          ].map((social, index) => (
+            <a
+              key={index}
+              href={social.href}
+              className="w-12 h-12 bg-card/80 backdrop-blur-sm border border-border hover:border-accent/50 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent transition-all duration-300 hover:scale-110 group"
+              aria-label={social.label}
+            >
+              <social.icon className="h-5 w-5 group-hover:animate-pulse" />
+            </a>
+          ))}
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-muted-foreground/50 rounded-full mt-2 animate-pulse"></div>
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">Scroll</p>
+        </div>
       </div>
     </section>
   );
