@@ -226,23 +226,6 @@ const HeroSection = () => {
           </h2>
         </div>
 
-        {/* Social Links - Subtle */}
-        <div className="fixed bottom-8 left-8 flex flex-col gap-4 z-50">
-          {[
-            { icon: Github, href: "#", label: "GitHub" },
-            { icon: Linkedin, href: "#", label: "LinkedIn" },
-            { icon: Mail, href: "#", label: "Email" },
-          ].map((social, index) => (
-            <a
-              key={index}
-              href={social.href}
-              className="w-12 h-12 bg-card/80 backdrop-blur-sm border border-border hover:border-accent/50 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent transition-all duration-300 hover:scale-110 group"
-              aria-label={social.label}
-            >
-              <social.icon className="h-5 w-5 group-hover:animate-pulse" />
-            </a>
-          ))}
-        </div>
 
       </div>
     </section>

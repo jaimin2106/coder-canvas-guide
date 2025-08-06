@@ -1,111 +1,139 @@
-import { Progress } from "@/components/ui/progress";
-import { Palette, Code, PenTool, Search } from "lucide-react";
+import { Brain, Code, Sparkles, Palette, Users, Zap } from "lucide-react";
 
 const SkillsSection = () => {
-  const skillCategories = [
+  const skills = [
     {
-      icon: Palette,
-      title: "UI Design",
-      percentage: 90,
+      id: 1,
+      title: "No-Code Development",
+      description: "Mastering responsive layouts, micro-interactions, and dynamic components, iterating on solutions and delivering more refined user experiences.",
+      icon: "🖥️",
+      gradient: "from-blue-400/20 to-cyan-400/20",
+      borderColor: "border-blue-400/30"
     },
     {
-      icon: Code,
-      title: "Coding", 
-      percentage: 60,
+      id: 2,
+      title: "Cognitive Biases in Digital Design",
+      description: "How users make decisions, form behavioural patterns, accounting for attention spans, memory limitations, and decision-making.",
+      icon: "🧠",
+      gradient: "from-purple-400/20 to-pink-400/20",
+      borderColor: "border-purple-400/30",
+      featured: true
     },
     {
-      icon: PenTool,
-      title: "Product Design",
-      percentage: 80,
+      id: 3,
+      title: "Exploring AI",
+      description: "Exploring the intersection of design and AI to create intuitive, intelligent, and user-centered experiences.",
+      icon: "✨",
+      gradient: "from-cyan-400/20 to-blue-400/20",
+      borderColor: "border-cyan-400/30"
     },
     {
-      icon: Search,
-      title: "User Research",
-      percentage: 85,
+      id: 4,
+      title: "Design System & Variables",
+      description: "Deepening expertise in design system architecture and the application of variables in Figma to enhance consistency, scalability, and workflow efficiency.",
+      icon: "🎨",
+      gradient: "from-green-400/20 to-emerald-400/20",
+      borderColor: "border-green-400/30"
     }
   ];
 
-  const additionalSkills = [
-    { title: "No Code Tools", percentage: 65 }
-  ];
-
-  const tools = [
-    { name: "Framer", logo: "🖼️" },
-    { name: "Webflow", logo: "🌊" },
-    { name: "Shopify", logo: "🛍️" }
-  ];
-
   return (
-    <section id="skills" className="py-20 bg-gradient-to-br from-background via-background to-accent/5 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          
-          {/* Left Side - Title and Description */}
-          <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-              My Professional<br />
-              <span className="text-accent">Background Skills and<br />
-              Accomplishments</span>
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum been the industry's standard dummy text ever since the when
-            </p>
-          </div>
+    <section id="skills" className="py-20 bg-gradient-to-br from-background via-card/30 to-accent/5 relative overflow-hidden">
+      {/* Decorative Quote */}
+      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center animate-fade-in">
+        <p className="text-sm text-muted-foreground/60 italic font-light max-w-md">
+          "The more we know, the more we know<br />
+          there's more to know"
+        </p>
+      </div>
 
-          {/* Right Side - Skills */}
-          <div className="space-y-8">
-            
-            {/* Skill Icons */}
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 mb-8">
-              {skillCategories.map((skill, index) => {
-                const Icon = skill.icon;
-                return (
-                  <div key={index} className="flex flex-col items-center space-y-3 animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
-                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-card/50 border border-accent/20 flex items-center justify-center hover:bg-accent/10 transition-all duration-300 backdrop-blur-sm">
-                      <Icon size={32} className="text-accent" />
-                    </div>
-                    <span className="text-sm font-medium text-foreground text-center">{skill.title}</span>
-                  </div>
-                );
-              })}
-            </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in" style={{animationDelay: '0.2s'}}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            Skills & Interests
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            My career is a continuous work in progress. These are some subjects I've been 
+            interested and studying to improve skills and amplify knowledge.
+          </p>
+        </div>
 
-            {/* Progress Bars */}
-            <div className="space-y-6">
-              {/* Main Skills with Icons */}
-              <div className="grid md:grid-cols-2 gap-6">
-                {skillCategories.map((skill, index) => (
-                  <div key={index} className="space-y-3 animate-fade-in" style={{animationDelay: `${(index + 4) * 0.1}s`}}>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-foreground">{skill.title}</span>
-                      <span className="text-sm font-bold text-accent">{skill.percentage}%</span>
-                    </div>
-                    <Progress value={skill.percentage} className="h-2" />
-                  </div>
-                ))}
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {skills.map((skill, index) => (
+            <div
+              key={skill.id}
+              className={`
+                group relative p-6 lg:p-8 rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl animate-fade-in
+                ${skill.borderColor} bg-gradient-to-br ${skill.gradient}
+                ${skill.featured ? 'md:col-span-2 lg:col-span-1' : ''}
+                hover:border-opacity-60 cursor-pointer
+              `}
+              style={{animationDelay: `${index * 0.15}s`}}
+            >
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                <div className="w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]" />
               </div>
 
-              {/* Additional Skills */}
-              {additionalSkills.map((skill, index) => (
-                <div key={index} className="space-y-3 animate-fade-in" style={{animationDelay: `${(skillCategories.length + 4 + index) * 0.1}s`}}>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-foreground">{skill.title}</span>
-                    <span className="text-sm font-bold text-accent">{skill.percentage}%</span>
+              {/* Content */}
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="mb-6 flex items-center">
+                  <div className="text-4xl lg:text-5xl mr-4 group-hover:scale-110 transition-transform duration-300">
+                    {skill.icon}
                   </div>
-                  <Progress value={skill.percentage} className="h-2" />
+                  {skill.featured && (
+                    <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="w-2 h-2 bg-accent/60 rounded-full animate-ping" />
+                      <div className="w-2 h-2 bg-accent/40 rounded-full animate-ping" style={{animationDelay: '0.5s'}} />
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
 
-            {/* Tools */}
-            <div className="flex items-center space-x-8 pt-6 animate-fade-in" style={{animationDelay: '1s'}}>
-              {tools.map((tool, index) => (
-                <div key={index} className="flex items-center space-x-2 text-muted-foreground hover:text-accent transition-colors duration-300">
-                  <span className="text-xl">{tool.logo}</span>
-                  <span className="text-sm font-medium">{tool.name}</span>
+                {/* Title */}
+                <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
+                  {skill.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-muted-foreground leading-relaxed text-sm lg:text-base group-hover:text-foreground/80 transition-colors duration-300">
+                  {skill.description}
+                </p>
+
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent/20 rounded-3xl transition-all duration-500" />
+              </div>
+
+              {/* Floating Decoration */}
+              {skill.featured && (
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                  <Sparkles className="h-5 w-5 text-accent animate-pulse" />
                 </div>
-              ))}
+              )}
             </div>
+          ))}
+        </div>
+
+        {/* Bottom Decorative Tools Section */}
+        <div className="mt-16 text-center animate-fade-in" style={{animationDelay: '0.8s'}}>
+          <div className="flex justify-center items-center gap-8 flex-wrap">
+            {[
+              { icon: "⭐", name: "Framer" },
+              { icon: "📦", name: "TextEdit" },
+              { icon: "🗂️", name: "Folder Colorizer Pro" },
+              { icon: "↔️", name: "ResizeIt" },
+              { icon: "🟣", name: "CleanMyMac" }
+            ].map((tool, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-2 px-4 py-2 bg-card/30 border border-border/50 rounded-full hover:bg-accent/10 hover:border-accent/30 transition-all duration-300 hover:scale-105"
+              >
+                <span className="text-lg">{tool.icon}</span>
+                <span className="text-sm font-medium text-muted-foreground">{tool.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -129,7 +129,7 @@ const ProjectsSection = () => {
         {/* Projects Bento Grid */}
         <div 
           ref={containerRef}
-          className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-12 gap-4 h-[500px] md:h-[600px] lg:h-[700px] transition-all duration-700 ease-in-out"
+          className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-12 gap-4 h-[600px] md:h-[700px] lg:h-[800px] transition-all duration-700 ease-in-out"
           key={currentSlide}
         >
           {currentProjects.projects.map((project, index) => {
@@ -157,11 +157,12 @@ const ProjectsSection = () => {
                 className={`
                   ${gridClasses} 
                   relative group rounded-3xl overflow-hidden cursor-pointer
-                  hover:scale-[1.03] transition-all duration-700 ease-out
+                  transition-all duration-700 ease-out
                   animate-fade-in hover:shadow-2xl hover:shadow-accent/30
                   hover:z-10 transform-gpu
-                  ${project.size === 'featured' ? 'bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20' : ''}
-                  ${project.size === 'large' ? 'hover:scale-[1.02]' : ''}
+                  ${project.size === 'featured' ? 'bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20 hover:scale-[1.05]' : 'hover:scale-[1.08]'}
+                  ${project.size === 'large' ? 'hover:scale-[1.04]' : ''}
+                  hover:rotate-1 hover:-translate-y-2
                 `}
                 style={{ 
                   animationDelay: `${index * 200}ms`,
@@ -173,10 +174,13 @@ const ProjectsSection = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1"
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-125 group-hover:rotate-2 group-hover:brightness-110 group-hover:contrast-110"
                   />
                   {/* Animated Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-transparent opacity-70 group-hover:opacity-50 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent opacity-70 group-hover:opacity-40 transition-all duration-500" />
+                  
+                  {/* Enhanced Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-radial from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   
                   {/* Floating particles effect for featured card */}
                   {project.size === 'featured' && (
@@ -225,7 +229,15 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Enhanced Hover Effect Border with Glow */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent/40 rounded-3xl transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.3)]" />
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent/60 rounded-3xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(var(--accent),0.4)]" />
+                
+                {/* Magic Sparkle Effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full animate-ping" style={{animationDelay: '0s'}} />
+                  <div className="absolute top-3/4 right-1/4 w-0.5 h-0.5 bg-accent rounded-full animate-ping" style={{animationDelay: '0.3s'}} />
+                  <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-white/80 rounded-full animate-ping" style={{animationDelay: '0.6s'}} />
+                  <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-accent/80 rounded-full animate-ping" style={{animationDelay: '0.9s'}} />
+                </div>
                 
                 {/* Corner accent for featured card */}
                 {project.size === 'featured' && (
