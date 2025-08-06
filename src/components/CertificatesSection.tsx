@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Award, ExternalLink, Calendar } from "lucide-react";
+import { ChevronLeft, ChevronRight, Award, ExternalLink, Calendar, Star, Shield, Trophy } from "lucide-react";
 import { Button } from "./ui/button";
+import { motion, AnimatePresence } from "framer-motion";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const CertificatesSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,138 +76,274 @@ const CertificatesSection = () => {
     setCurrentIndex(index);
   };
 
+  const { ref, isVisible } = useScrollAnimation(0.1);
+
   return (
-    <section id="certificates" className="py-20 bg-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      ref={ref} 
+      id="certificates" 
+      className="py-20 bg-gradient-to-br from-background via-card/30 to-accent/5 relative overflow-hidden"
+    >
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-20 left-10 w-32 h-32 bg-accent/5 rounded-full blur-3xl"
+          animate={{ 
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-10 w-40 h-40 bg-purple-400/5 rounded-full blur-3xl"
+          animate={{ 
+            y: [0, 20, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Certificates & Achievements
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full"
+            initial={{ scale: 0 }}
+            animate={isVisible ? { scale: 1 } : { scale: 0 }}
+            transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
+          >
+            <Trophy className="h-5 w-5 text-accent" />
+            <span className="text-accent font-medium text-sm">Professional Certifications</span>
+          </motion.div>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            Certificates & 
+            <span className="text-accent block">Achievements</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Professional certifications and achievements that validate my expertise 
             and commitment to continuous learning in technology.
           </p>
-        </div>
+        </motion.div>
 
         {/* Certificate Carousel */}
-        <div className="relative">
-          <div className="overflow-hidden rounded-lg">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {certificates.map((cert, index) => (
-                <div key={cert.credentialId} className="w-full flex-shrink-0">
-                  <div className="bg-card rounded-lg shadow-large border border-border-soft overflow-hidden mx-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
-                      {/* Certificate Image */}
-                      <div className="relative">
-                        <img
-                          src={cert.image}
-                          alt={cert.title}
-                          className="w-full h-64 lg:h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
-                          <Award className="h-16 w-16 text-accent opacity-80" />
-                        </div>
+        <motion.div 
+          className="relative"
+          initial={{ opacity: 0 }}
+          animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
+          <div className="overflow-hidden rounded-3xl">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={currentIndex}
+                className="w-full"
+                initial={{ opacity: 0, x: 300 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -300 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              >
+                <div className="bg-card/50 backdrop-blur-sm rounded-3xl shadow-2xl border border-border/50 overflow-hidden mx-4 group hover:shadow-accent/20 transition-all duration-500">
+                  <div className="grid grid-cols-1 lg:grid-cols-2">
+                    {/* Certificate Image */}
+                    <div className="relative group/image">
+                      <motion.img
+                        src={certificates[currentIndex].image}
+                        alt={certificates[currentIndex].title}
+                        className="w-full h-64 lg:h-full object-cover"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.4 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-accent/10 to-transparent flex items-center justify-center">
+                        <motion.div
+                          className="flex items-center gap-4"
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
+                        >
+                          <Award className="h-16 w-16 text-white drop-shadow-2xl" />
+                          <Shield className="h-12 w-12 text-white/80 drop-shadow-xl" />
+                        </motion.div>
                       </div>
-
-                      {/* Certificate Details */}
-                      <div className="p-8 lg:p-12">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center gap-3">
-                            <div className="p-2 bg-accent-light rounded-lg">
-                              <Award className="h-6 w-6 text-accent" />
-                            </div>
-                            <div>
-                              <h3 className="text-2xl font-bold text-foreground mb-1">
-                                {cert.title}
-                              </h3>
-                              <p className="text-accent font-medium">{cert.issuer}</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center text-muted-foreground text-sm mb-4">
-                          <Calendar className="h-4 w-4 mr-2" />
-                          <span>Issued: {new Date(cert.date).toLocaleDateString()}</span>
-                        </div>
-
-                        <p className="text-muted-foreground mb-6 leading-relaxed">
-                          {cert.description}
-                        </p>
-
-                        {/* Skills */}
-                        <div className="mb-6">
-                          <h4 className="text-sm font-semibold text-foreground mb-3">Skills Validated:</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {cert.skills.map((skill) => (
-                              <span
-                                key={skill}
-                                className="text-xs bg-accent-light text-accent px-3 py-1 rounded-full font-medium"
-                              >
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Credential Info */}
-                        <div className="flex items-center justify-between pt-4 border-t border-border-soft">
-                          <div>
-                            <p className="text-xs text-muted-foreground">Credential ID</p>
-                            <p className="text-sm font-mono text-foreground">{cert.credentialId}</p>
-                          </div>
-                          <Button variant="hero" size="sm" asChild>
-                            <a href={cert.verifyLink} className="gap-2">
-                              <ExternalLink className="h-4 w-4" />
-                              Verify
-                            </a>
-                          </Button>
-                        </div>
-                      </div>
+                      
+                      {/* Floating Badge */}
+                      <motion.div
+                        className="absolute top-4 right-4 bg-accent/20 backdrop-blur-md border border-accent/30 rounded-full px-3 py-1 flex items-center gap-2"
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.8, type: "spring" }}
+                      >
+                        <Star className="h-4 w-4 text-accent fill-accent" />
+                        <span className="text-white text-xs font-medium">Verified</span>
+                      </motion.div>
                     </div>
+
+                    {/* Certificate Details */}
+                    <motion.div 
+                      className="p-8 lg:p-12"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4, duration: 0.6 }}
+                    >
+                      <div className="flex items-start justify-between mb-6">
+                        <div className="flex items-start gap-4">
+                          <motion.div 
+                            className="p-3 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl border border-accent/20"
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                          >
+                            <Award className="h-8 w-8 text-accent" />
+                          </motion.div>
+                          <div>
+                            <motion.h3 
+                              className="text-2xl lg:text-3xl font-bold text-foreground mb-2 leading-tight"
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.6 }}
+                            >
+                              {certificates[currentIndex].title}
+                            </motion.h3>
+                            <motion.p 
+                              className="text-accent font-semibold text-lg"
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.7 }}
+                            >
+                              {certificates[currentIndex].issuer}
+                            </motion.p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <motion.div 
+                        className="flex items-center text-muted-foreground text-sm mb-6"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.8 }}
+                      >
+                        <Calendar className="h-4 w-4 mr-2" />
+                        <span>Issued: {new Date(certificates[currentIndex].date).toLocaleDateString()}</span>
+                      </motion.div>
+
+                      <motion.p 
+                        className="text-muted-foreground mb-8 leading-relaxed text-lg"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.9 }}
+                      >
+                        {certificates[currentIndex].description}
+                      </motion.p>
+
+                      {/* Skills */}
+                      <motion.div 
+                        className="mb-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.0 }}
+                      >
+                        <h4 className="text-sm font-semibold text-foreground mb-4">Skills Validated:</h4>
+                        <div className="flex flex-wrap gap-3">
+                          {certificates[currentIndex].skills.map((skill, index) => (
+                            <motion.span
+                              key={skill}
+                              className="text-sm bg-gradient-to-r from-accent/20 to-accent/10 text-accent px-4 py-2 rounded-full font-medium border border-accent/20 hover:bg-accent/20 transition-all duration-300"
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 1.1 + index * 0.1, type: "spring" }}
+                              whileHover={{ scale: 1.05 }}
+                            >
+                              {skill}
+                            </motion.span>
+                          ))}
+                        </div>
+                      </motion.div>
+
+                      {/* Credential Info */}
+                      <motion.div 
+                        className="flex items-center justify-between pt-6 border-t border-border/50"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.2 }}
+                      >
+                        <div>
+                          <p className="text-xs text-muted-foreground">Credential ID</p>
+                          <p className="text-sm font-mono text-foreground font-medium">{certificates[currentIndex].credentialId}</p>
+                        </div>
+                        <Button variant="hero" size="sm" className="gap-2 hover:scale-105 transition-transform" asChild>
+                          <a href={certificates[currentIndex].verifyLink}>
+                            <ExternalLink className="h-4 w-4" />
+                            Verify
+                          </a>
+                        </Button>
+                      </motion.div>
+                    </motion.div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Navigation Arrows */}
-          <Button
-            variant="minimal"
-            size="icon"
-            onClick={prevSlide}
-            className="absolute left-2 top-1/2 -translate-y-1/2 shadow-medium hover:shadow-large"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 1.4 }}
           >
-            <ChevronLeft className="h-6 w-6" />
-          </Button>
-          
-          <Button
-            variant="minimal"
-            size="icon"
-            onClick={nextSlide}
-            className="absolute right-2 top-1/2 -translate-y-1/2 shadow-medium hover:shadow-large"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </Button>
-        </div>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={prevSlide}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:bg-accent/10 hover:border-accent/30 hover:scale-110 transition-all duration-300"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </Button>
+            
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={nextSlide}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:bg-accent/10 hover:border-accent/30 hover:scale-110 transition-all duration-300"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </Button>
+          </motion.div>
+        </motion.div>
 
         {/* Slide Indicators */}
-        <div className="flex justify-center mt-8 space-x-2">
+        <motion.div 
+          className="flex justify-center mt-8 space-x-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 1.6, duration: 0.6 }}
+        >
           {certificates.map((_, index) => (
-            <button
+            <motion.button
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? "bg-accent scale-125" 
-                  : "bg-muted hover:bg-accent/50"
+                  ? "bg-accent scale-125 shadow-lg shadow-accent/30" 
+                  : "bg-muted hover:bg-accent/50 hover:scale-110"
               }`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
