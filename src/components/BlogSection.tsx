@@ -72,11 +72,18 @@ const BlogSection = () => {
   const { containerRef, visibleItems } = useStaggeredAnimation(currentBlogs.length, 150);
 
   return (
-    <section ref={ref} id="blog" className="py-20 bg-gradient-to-br from-background via-purple-50/30 to-background relative overflow-hidden">
+    <motion.section 
+      ref={ref} 
+      id="blog" 
+      className="padding-responsive bg-gradient-surface relative overflow-hidden"
+      initial={{ opacity: 0, y: 60 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       {/* Animated Background */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl"
+          className="absolute top-1/4 right-1/4 w-64 h-64 bg-accent/3 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360],
@@ -88,7 +95,7 @@ const BlogSection = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-accent/5 rounded-full blur-3xl"
+          className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-primary/3 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 0.8, 1],
             x: [0, 50, 0],
@@ -102,7 +109,7 @@ const BlogSection = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container-responsive relative z-10">
         {/* Section Header */}
         <motion.div 
           className="text-center mb-16"
@@ -111,16 +118,16 @@ const BlogSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full"
+            className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full"
             initial={{ scale: 0 }}
             animate={isVisible ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
           >
-            <Bookmark className="h-5 w-5 text-purple-500" />
-            <span className="text-purple-500 font-medium text-sm">Latest Insights</span>
+            <Bookmark className="h-5 w-5 text-accent" />
+            <span className="text-accent font-medium text-sm">Latest Insights</span>
           </motion.div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-responsive-xl font-bold text-foreground mb-6">
             Latest Blog 
             <span className="text-accent block">Posts</span>
           </h2>
@@ -322,7 +329,7 @@ const BlogSection = () => {
           </Button>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
