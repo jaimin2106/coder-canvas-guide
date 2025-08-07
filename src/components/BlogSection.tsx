@@ -161,149 +161,93 @@ const BlogSection = () => {
           </div>
         </motion.div>
 
-        {/* Blog Grid - Horizontal on Mobile */}
+        {/* Blog Grid - Minimalistic Cards */}
         <div 
           ref={containerRef}
-          className="
-            grid grid-cols-1 gap-6
-            sm:grid-cols-2 sm:gap-6
-            md:grid-cols-3 md:gap-8
-            overflow-x-auto sm:overflow-x-visible
-            pb-4 sm:pb-0
-          "
-          style={{
-            // Mobile horizontal scroll
-            gridTemplateColumns: 'repeat(3, 280px)',
-            gridAutoFlow: 'column',
-          }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {currentBlogs.map((blog, index) => (
             <motion.article
               key={blog.title}
               className="
-                bg-card/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl 
-                transition-all duration-500 overflow-hidden group 
-                hover:-translate-y-2 border border-border/50 cursor-pointer
-                min-w-[280px] sm:min-w-0
-                hover:border-accent/30 hover:shadow-accent/10
+                bg-card backdrop-blur-sm rounded-xl shadow-medium hover:shadow-large 
+                transition-all duration-300 overflow-hidden group cursor-pointer
+                border border-border hover:border-accent/30 hover:shadow-accent-glow
+                hover:-translate-y-1
               "
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={
                 visibleItems.includes(index) 
-                  ? { opacity: 1, y: 0, scale: 1 } 
-                  : { opacity: 0, y: 50, scale: 0.9 }
+                  ? { opacity: 1, y: 0 } 
+                  : { opacity: 0, y: 30 }
               }
               transition={{ 
-                duration: 0.6, 
+                duration: 0.5, 
                 ease: "easeOut",
-                type: "spring",
-                stiffness: 100
+                delay: index * 0.1
               }}
               whileHover={{ 
                 scale: 1.02,
-                rotate: [0, 1, -1, 0],
-                transition: { duration: 0.3 }
+                transition: { duration: 0.2 }
               }}
+              onClick={() => window.location.href = `/blog/${blog.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
             >
-              {/* Blog Image */}
-              <div className="relative overflow-hidden">
+              {/* Minimalistic Blog Image */}
+              <div className="relative overflow-hidden h-40">
                 <motion.img
                   src={blog.image}
                   alt={blog.title}
-                  className="w-full h-48 object-cover transition-transform duration-500"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-full h-full object-cover transition-transform duration-300"
+                  whileHover={{ scale: 1.05 }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                 
-                {/* Floating View Count */}
-                <motion.div 
-                  className="absolute top-4 right-4 bg-accent/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-medium border border-accent/30"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.3, type: "spring" }}
-                >
+                {/* Clean View Count */}
+                <div className="absolute top-3 right-3 bg-background/90 backdrop-blur-sm text-foreground text-xs px-2 py-1 rounded-md font-medium">
                   <Eye className="h-3 w-3 inline mr-1" />
                   {blog.views}
-                </motion.div>
-
-                {/* Hover Overlay with Bookmark */}
-                <motion.div
-                  className="absolute top-4 left-4 opacity-0 group-hover:opacity-100"
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                    <Bookmark className="h-4 w-4 text-white" />
-                  </div>
-                </motion.div>
+                </div>
               </div>
 
-              {/* Blog Content */}
-              <div className="p-6">
-                <motion.div 
-                  className="flex items-center text-muted-foreground text-sm mb-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <Calendar className="h-4 w-4 mr-2" />
+              {/* Minimalistic Blog Content */}
+              <div className="p-4">
+                {/* Clean Meta Info */}
+                <div className="flex items-center text-muted-foreground text-xs mb-2">
                   <span>{new Date(blog.date).toLocaleDateString()}</span>
                   <span className="mx-2">•</span>
-                  <Clock className="h-4 w-4 mr-1" />
                   <span>{blog.readTime}</span>
-                </motion.div>
+                </div>
 
-                <motion.h3 
-                  className="text-xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors leading-tight line-clamp-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
+                {/* Clean Title */}
+                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-accent transition-colors line-clamp-2">
                   {blog.title}
-                </motion.h3>
+                </h3>
 
-                <motion.p 
-                  className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
+                {/* Clean Excerpt */}
+                <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                   {blog.excerpt}
-                </motion.p>
+                </p>
 
-                {/* Tags */}
-                <motion.div 
-                  className="flex flex-wrap gap-2 mb-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  {blog.tags.map((tag, tagIndex) => (
-                    <motion.span
+                {/* Clean Tags */}
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {blog.tags.slice(0, 2).map((tag) => (
+                    <span
                       key={tag}
-                      className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full border border-accent/20 hover:bg-accent/20 transition-all duration-300"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.6 + tagIndex * 0.1, type: "spring" }}
-                      whileHover={{ scale: 1.05 }}
+                      className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-md"
                     >
                       {tag}
-                    </motion.span>
+                    </span>
                   ))}
-                </motion.div>
+                  {blog.tags.length > 2 && (
+                    <span className="text-xs text-muted-foreground">+{blog.tags.length - 2}</span>
+                  )}
+                </div>
 
-                {/* Read More */}
-                <motion.div 
-                  className="flex items-center text-accent text-sm font-medium group-hover:gap-2 transition-all duration-300"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.7 }}
-                  whileHover={{ x: 5 }}
-                >
+                {/* Clean Read More */}
+                <div className="flex items-center text-accent text-sm font-medium">
                   <span>Read More</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </motion.div>
+                  <ArrowRight className="h-3 w-3 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
             </motion.article>
           ))}
