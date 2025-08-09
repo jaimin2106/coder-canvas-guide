@@ -64,7 +64,7 @@ const ProjectsSection = () => {
     <motion.section 
       ref={ref}
       id="projects" 
-      className="padding-responsive bg-gradient-surface relative overflow-hidden"
+      className="padding-responsive bg-gradient-surface relative overflow-visible"
       initial={{ opacity: 0, y: 60 }}
       animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -117,16 +117,16 @@ const ProjectsSection = () => {
         {/* Projects Carousel */}
         <div 
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth"
+          className="flex gap-6 overflow-x-auto overflow-y-visible scrollbar-hide scroll-smooth snap-x snap-mandatory overscroll-x-contain py-2 pr-4 -mr-4"
         >
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="relative flex-shrink-0 w-80 h-96 rounded-3xl overflow-hidden group cursor-pointer"
+              className="relative flex-shrink-0 w-80 h-96 rounded-3xl overflow-hidden group cursor-pointer snap-start will-change-transform transform-gpu hover:z-10 ring-1 ring-border/50 hover:ring-accent/40 shadow-medium hover:shadow-large transition-all"
               initial={{ opacity: 0, x: 60 }}
               animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -10 }}
+              whileHover={{ scale: 1.03, y: -6 }}
             >
               {/* Background Image */}
               <div className="absolute inset-0">
