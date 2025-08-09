@@ -1,7 +1,11 @@
 import { Heart, Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 import { Button } from "./ui/button";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const Footer = () => {
+  const { ref, isVisible } = useScrollAnimation(0.1);
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -21,19 +25,36 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-primary-foreground relative">
+    <motion.footer 
+      ref={ref}
+      className="bg-primary text-primary-foreground relative"
+      initial={{ opacity: 0, y: 50 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       {/* Scroll to Top Button */}
-      <Button
-        onClick={scrollToTop}
-        variant="hero"
-        size="icon"
-        className="absolute -top-6 left-1/2 transform -translate-x-1/2 shadow-accent-glow"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+        transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
       >
-        <ArrowUp className="h-5 w-5" />
-      </Button>
+        <Button
+          onClick={scrollToTop}
+          variant="hero"
+          size="icon"
+          className="absolute -top-6 left-1/2 transform -translate-x-1/2 shadow-accent-glow"
+        >
+          <ArrowUp className="h-5 w-5" />
+        </Button>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-4 gap-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+        >
           {/* Brand Section */}
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold mb-4">Portfolio</h3>
@@ -96,10 +117,15 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Section */}
-        <div className="border-t border-primary-foreground/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <motion.div 
+          className="border-t border-primary-foreground/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
+        >
           <div className="text-primary-foreground/70 text-sm mb-4 md:mb-0">
             © 2024 Your Name. All rights reserved.
           </div>
@@ -108,9 +134,9 @@ const Footer = () => {
             <Heart className="h-4 w-4 mx-1 text-red-400 animate-pulse" />
             <span>using React & TypeScript</span>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

@@ -4,6 +4,8 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
+import { useScrollAnimation, useStaggeredAnimation } from "../hooks/useScrollAnimation";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,8 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { ref, isVisible } = useScrollAnimation(0.1);
+  const { containerRef, visibleItems } = useStaggeredAnimation(3, 200);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -87,10 +91,22 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <motion.section 
+      ref={ref}
+      id="contact" 
+      className="py-20 bg-background"
+      initial={{ opacity: 0 }}
+      animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Get In Touch
           </h2>
@@ -98,11 +114,23 @@ const ContactSection = () => {
             Have a project in mind or want to collaborate? I'd love to hear from you. 
             Let's create something amazing together!
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div 
+          ref={containerRef}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+        >
           {/* Contact Form */}
-          <div className="bg-card p-8 rounded-lg shadow-large border border-border-soft">
+          <motion.div 
+            className="bg-card p-8 rounded-lg shadow-large border border-border-soft"
+            initial={{ opacity: 0, x: -50 }}
+            animate={
+              visibleItems.includes(0) 
+                ? { opacity: 1, x: 0 } 
+                : { opacity: 0, x: -50 }
+            }
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <h3 className="text-2xl font-semibold text-foreground mb-6">Send a Message</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -187,10 +215,19 @@ const ContactSection = () => {
                 )}
               </Button>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, x: 50 }}
+            animate={
+              visibleItems.includes(1) 
+                ? { opacity: 1, x: 0 } 
+                : { opacity: 0, x: 50 }
+            }
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          >
             <div>
               <h3 className="text-2xl font-semibold text-foreground mb-6">
                 Let's Connect
@@ -250,10 +287,10 @@ const ContactSection = () => {
                 feel free to reach out via phone or LinkedIn.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

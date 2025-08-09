@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Download, Sun, Moon } from "lucide-react";
 import { Button } from "./ui/button";
+import { motion } from "framer-motion";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,12 +36,15 @@ const Navigation = () => {
   ];
 
   return (
-    <nav
+    <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-lg shadow-medium border-b border-border-soft"
           : "bg-transparent"
       }`}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -127,7 +131,7 @@ const Navigation = () => {
           </div>
         </div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 

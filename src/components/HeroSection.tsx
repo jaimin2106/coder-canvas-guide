@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Star, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const { ref, isVisible } = useScrollAnimation(0.1);
   
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -15,10 +18,14 @@ const HeroSection = () => {
   };
 
   return (
-    <section 
+    <motion.section 
+      ref={ref}
       id="home" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-gradient-to-br from-background via-background to-primary/5"
       onMouseMove={handleMouseMove}
+      initial={{ opacity: 0 }}
+      animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       {/* Subtle Background Effects */}
       <div className="absolute inset-0 z-0">
@@ -53,15 +60,25 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Trust Badge */}
-        <div className="mb-8 animate-fade-in">
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
+        >
           <Badge variant="outline" className="bg-accent/10 border-accent/20 text-accent px-6 py-2 gap-2 text-sm font-medium backdrop-blur-sm">
             <Star className="h-4 w-4 fill-current" />
             TRUSTED BY 50+ BUSINESSES WORLDWIDE
           </Badge>
-        </div>
+        </motion.div>
 
         {/* Main Headline */}
-        <div className="mb-8 animate-fade-in" style={{animationDelay: '0.2s'}}>
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+        >
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground leading-[0.9] tracking-tight mb-6">
             Plan. Design.
             <br />
@@ -72,10 +89,15 @@ const HeroSection = () => {
             From strategic roadmaps and pixel-perfect designs to robust, scalable code 
             and ongoing support, we partner with you at every step.
           </p>
-        </div>
+        </motion.div>
 
         {/* CTA Button */}
-        <div className="mb-16 animate-fade-in" style={{animationDelay: '0.4s'}}>
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
+        >
           <Button 
             size="lg"
             className="bg-accent hover:bg-accent-hover text-accent-foreground px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
@@ -83,10 +105,14 @@ const HeroSection = () => {
             Book Discovery Call
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
-        </div>
+        </motion.div>
 
         {/* Developer Dashboard Preview */}
-        <div className="animate-fade-in" style={{animationDelay: '0.6s'}}>
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+        >
           <div className="relative mx-auto max-w-5xl">
             <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] group">
               
@@ -215,20 +241,25 @@ const HeroSection = () => {
             <div className="absolute inset-0 -z-10 bg-gradient-to-r from-accent/10 via-transparent to-green-400/10 rounded-2xl blur-3xl scale-110 group-hover:scale-125 transition-transform duration-700"></div>
             <div className="absolute inset-0 -z-20 bg-accent/5 rounded-2xl blur-[100px] scale-150"></div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Large Text */}
-        <div className="mt-20 animate-fade-in" style={{animationDelay: '0.8s'}}>
+        <motion.div 
+          className="mt-20"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ delay: 1.0, duration: 0.8, ease: "easeOut" }}
+        >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground/10 leading-tight tracking-wider">
             Make your startup
             <br />
             <span className="text-accent/20">dreams come true</span>
           </h2>
-        </div>
+        </motion.div>
 
 
       </div>
-    </section>
+    </motion.section>
   );
 };
 
